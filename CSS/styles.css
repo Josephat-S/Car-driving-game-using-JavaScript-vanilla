@@ -1,0 +1,622 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+#hud {
+    position: fixed;
+    padding: 20px;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    pointer-events: none;
+}
+
+#scoring {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#score {
+    font-size: 32px;
+    font-weight: bold;
+    color: #FFD700;
+    margin-bottom: 5px;
+}
+
+#score-details {
+    font-size: 18px;
+    color: #90EE90;
+}
+
+#distance, #points {
+    margin-top: 5px;
+}
+
+#speed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 28px;
+    color: #90EE90;
+}
+
+#stage {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #FFD700;
+}
+
+#lap-counter {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #90EE90;
+    font-size: 20px;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-family: Arial, sans-serif;
+    backdrop-filter: blur(3px);
+}
+
+/* Start Screen Styles */
+#start-screen {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(26, 26, 26, 0.3) 100%);
+    backdrop-filter: blur(2px);
+}
+
+.retro-logo {
+    position: relative;
+    margin-bottom: 40px;
+    perspective: 500px;
+}
+
+.logo-text {
+    font-size: 64px;
+    font-weight: bold;
+    color: #FFD700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 
+        0 0 10px rgba(255, 215, 0, 0.7),
+        0 0 20px rgba(255, 215, 0, 0.5),
+        0 0 30px rgba(255, 215, 0, 0.3);
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+.logo-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+    );
+    animation: shine 3s infinite;
+    transform: skewX(-20deg);
+}
+
+.rtb-banner {
+    font-size: 28px;
+    font-weight: bold;
+    color: #FF4500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 60px;
+    animation: bannerWave 4s ease-in-out infinite;
+    text-shadow: 
+        0 0 10px rgba(255, 69, 0, 0.7),
+        0 0 20px rgba(255, 69, 0, 0.5);
+}
+
+.start-prompt {
+    font-size: 32px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: pulse 1.5s ease-in-out infinite;
+    cursor: pointer;
+}
+
+/* Animations */
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0) rotateX(0);
+    }
+    50% {
+        transform: translateY(-20px) rotateX(5deg);
+    }
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    20% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes bannerWave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.95);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.banner {
+    font-size: 24px;
+    margin-bottom: 40px;
+    color: #FF4500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.menu-buttons button {
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(45deg, #4A90E2, #357ABD);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 200px;
+}
+
+.menu-buttons button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+}
+
+.controls-section {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.controls-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 10px;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.key {
+    background: #4A90E2;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    min-width: 30px;
+    text-align: center;
+}
+
+.action {
+    color: #CCC;
+}
+
+#settings-menu {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.settings-content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    min-width: 300px;
+}
+
+.setting-item {
+    margin-bottom: 20px;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 8px;
+    color: #FFD700;
+}
+
+.setting-item input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    -webkit-appearance: none;
+    background: #4A90E2;
+}
+
+.setting-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+#backToMenu {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background: #FF4500;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#backToMenu:hover {
+    background: #FF6347;
+}
+
+#countdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.countdown-text {
+    font-size: 150px;
+    color: #FFD700;
+    font-weight: bold;
+    text-shadow: 
+        0 0 20px rgba(255, 215, 0, 0.7),
+        0 0 40px rgba(255, 215, 0, 0.5);
+    animation: pulseScale 1s ease-in-out;
+}
+
+@keyframes pulseScale {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Stage Transition */
+.stage-transition {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: 500;
+    z-index: 1000;
+    animation: fadeInOut 2s ease-in-out;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Magic Garden Stage Transition */
+.stage-transition.magic-garden {
+    background: linear-gradient(135deg, rgba(255, 192, 203, 0.8), rgba(230, 230, 250, 0.8));
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    color: #FF1493;
+    font-family: 'Arial', cursive;
+    font-size: 1.5em;
+    padding: 20px 40px;
+    animation: magicFadeInOut 3s ease-in-out;
+}
+
+@keyframes magicFadeInOut {
+    0% { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(20px) scale(0.8);
+        filter: blur(10px);
+    }
+    20% { 
+        opacity: 1; 
+        transform: translateX(-50%) translateY(0) scale(1.1);
+        filter: blur(0);
+    }
+    80% { 
+        opacity: 1; 
+        transform: translateX(-50%) translateY(0) scale(1);
+        filter: blur(0);
+    }
+    100% { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(-20px) scale(0.8);
+        filter: blur(10px);
+    }
+}
+
+/* Collision Effect */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Stage Transition Animation */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+}
+
+/* Pause Menu Styles */
+#pause-menu {
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+}
+
+#pause-menu .menu-content {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#pause-menu h2 {
+    color: #FFD700;
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#pause-menu .menu-buttons {
+    min-width: 250px;
+}
+
+#pause-menu .menu-buttons button {
+    width: 100%;
+    margin: 5px 0;
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#pause-menu .menu-buttons button:hover {
+    background: linear-gradient(45deg, #3498db, #2c3e50);
+}
+
+/* Menu Styles */
+#menu {
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+}
+
+#menu .menu-buttons {
+    min-width: 250px;
+}
+
+#menu .menu-buttons button {
+    width: 100%;
+    margin: 5px 0;
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#menu .menu-buttons button:hover {
+    background: linear-gradient(45deg, #3498db, #2c3e50);
+}
+
+#menu .title {
+    color: #FFD700;
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.victory-text {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: #FFD700;
+}
+
+.victory-text h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.victory-text p {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.victory-text .final-score {
+    font-size: 36px;
+    margin: 30px 0;
+    color: #90EE90;
+}
+
+.victory-text button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.victory-text button:hover {
+    background: #45a049;
+    transform: scale(1.05);
+}
+
+#radio-interface {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #444;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+#radio-title {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #90EE90;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#current-track {
+    text-align: center;
+    font-size: 14px;
+    margin: 10px 0;
+    color: #FFD700;
+    min-height: 20px;
+}
+
+.radio-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.radio-button {
+    background: #333;
+    border: 1px solid #555;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 12px;
+}
+
+.radio-button:hover {
+    background: #444;
+}
+
+.radio-button.active {
+    background: #90EE90;
+    color: #000;
+}
+
+#radio-instructions {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    margin-top: 10px;
+    font-style: italic;
+} 

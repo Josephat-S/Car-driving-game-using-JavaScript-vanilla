@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSkillsDrive - Rwanda</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- ZzFX - Zuper Zmall Zound Zynth -->
+    <script src="JS/lib/zzfx.js"></script>
+    <!-- ZzFXM - Zuper Zmall Zound Zynth Music -->
+    <script src="JS/lib/zzfxm.js"></script>
+</head>
+<body>
+    <div id="game-container">
+        <div id="gameCanvas"></div>
+        <div id="hud" class="hidden">
+            <div id="scoring">
+                <div id="score">Score: 0</div>
+                <div id="score-details">
+                    <div id="distance">Distance: 0m</div>
+                    <div id="points">Points: 0.00</div>
+                </div>
+            </div>
+            <div id="speed">0 km/h</div>
+            <div id="stage">Stage 1: Nyarugenge</div>
+            <div id="lap-counter">Lap: 1/3</div>
+            
+            <!-- Radio Interface -->
+            <div id="radio-interface">
+                <div id="radio-title">Radio</div>
+                <div id="current-track">No Track Playing</div>
+                <div class="radio-controls">
+                    <button class="radio-button" data-track="1">1</button>
+                    <button class="radio-button" data-track="2">2</button>
+                    <button class="radio-button" data-track="3">3</button>
+                    <button class="radio-button" data-track="off">OFF</button>
+                </div>
+                <div id="radio-instructions">Press 1-3 to change tracks, 0 to turn off</div>
+            </div>
+        </div>
+        
+        <!-- Countdown Overlay -->
+        <div id="countdown" class="hidden">
+            <div class="countdown-text">3</div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <div class="retro-logo">
+                <div class="logo-text">FutureSkillsDrive</div>
+                <div class="logo-shine"></div>
+            </div>
+            <div class="rtb-banner">RTB COMPETITION FUTURE SKILLS</div>
+            <div class="start-prompt">Click to Play</div>
+        </div>
+
+        <!-- Menu (initially hidden) -->
+        <div id="menu" class="screen hidden">
+            <h1 class="title">FutureSkillsDrive</h1>
+            <div class="menu-buttons">
+                <button id="startBtn" data-menu-state="main">Start Race</button>
+                <button id="resumeBtn" data-menu-state="pause" class="hidden">Resume Game</button>
+                <button id="settingsBtn">Settings</button>
+                <button id="scoresBtn">High Scores</button>
+                <button id="helpBtn">How to Play</button>
+                <button id="exitBtn" data-menu-state="main">Exit Game</button>
+                <button id="exitToMenuBtn" data-menu-state="pause" class="hidden">Exit to Menu</button>
+            </div>
+            <div class="controls-section">
+                <h2>Game Controls</h2>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <span class="key">←→</span>
+                        <span class="action">Steer Left/Right</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">🖱️</span>
+                        <span class="action">Mouse Steering</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">Space</span>
+                        <span class="action">Brake</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">F</span>
+                        <span class="action">Free Ride Mode</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">Esc</span>
+                        <span class="action">Menu</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">R</span>
+                        <span class="action">Toggle Radio</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings-menu" class="screen hidden">
+            <h2>Settings</h2>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <label for="musicVolume">Music Volume</label>
+                    <input type="range" id="musicVolume" min="0" max="100" value="50">
+                </div>
+                <div class="setting-item">
+                    <label for="sfxVolume">Sound Effects Volume</label>
+                    <input type="range" id="sfxVolume" min="0" max="100" value="50">
+                </div>
+                <div class="setting-item">
+                    <label for="mouseControl">Mouse Steering</label>
+                    <input type="checkbox" id="mouseControl">
+                </div>
+                <button id="backToMenu">Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- High Scores Screen -->
+        <div id="high-scores" class="screen hidden">
+            <h2>High Scores</h2>
+            <button id="backToMenuFromScores" class="back-button">Back to Menu</button>
+        </div>
+    </div>
+    <script src="JS/sound.js"></script>
+    <script src="JS/environment.js"></script>
+    <script src="JS/road.js"></script>
+    <script src="JS/car3d.js"></script>
+    <script src="JS/aiVehicles.js"></script>
+    <script src="JS/obstacles.js" defer></script>
+    <script src="JS/game.js" defer></script>
+    <!-- Game Scripts -->
+    <script src="JS/radio.js"></script>
+</body>
+</html> 
