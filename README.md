@@ -36,21 +36,40 @@ A simple yet engaging car driving game built with pure JavaScript, HTML, and CSS
 ## 📁 Project Structure
 
 ```
-Car-driving-game-using-JavaScript-vanilla/
-├── index.html
-├── style.css
-├── script.js
-└── README.md
+├───index.html
+├───README.md
+│
+├───CSS
+│       styles.css
+│
+├───JS
+│   │   aiVehicles.js
+│   │   car3d.js
+│   │   environment.js
+│   │   game.js
+│   │   obstacles.js
+│   │   radio.js
+│   │   road.js
+│   │   roadSigns.js
+│   │   scenery.js
+│   │   sound.js
+│   │
+│   └───lib
+│           zzfx.js
+│           zzfxm.js
+│
+└───Screenshots
+        Screenshot 1.png
+        Screenshot 2.png
+        Screenshot 3.png
 ```
-
-- `index.html` – The main game page.
-- `style.css` – All styles for the game.
-- `script.js` – Game logic and rendering.
-
 ## ✨ Demo
 
-Add a screenshot or GIF here to show off gameplay!
-
+<p align="center">
+  <img src="Screenshots/Screenshot%201.png" width="400">
+  <img src="Screenshots/Screenshot%202.png" width="400">
+  <img src="Screenshots/Screenshot%203.png" width="400">
+</p>
 ## 🚀 Contributing
 
 Pull requests are welcome! If you have suggestions for improvements or new features, please open an issue or submit a PR.
