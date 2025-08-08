@@ -65,9 +65,11 @@ A simple yet engaging car driving game built with pure JavaScript, HTML, and CSS
 ```
 ## ✨ Demo
 
-<img src="Screenshot/Screenshot 1.png" alt="game start image" width="200">
-<img src="Screenshot/Screenshot 2.png" alt="game start image" width="200">
-<img src="Screenshot/Screenshot 3.png" alt="game start image" width="200">
+<p align="center">
+  <img src="Screenshots/Screenshot%201.png" width="400">
+  <img src="Screenshots/Screenshot%202.png" width="400">
+  <img src="Screenshots/Screenshot%203.png" width="400">
+</p>
 ## 🚀 Contributing
 
 Pull requests are welcome! If you have suggestions for improvements or new features, please open an issue or submit a PR.
